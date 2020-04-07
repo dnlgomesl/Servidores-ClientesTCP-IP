@@ -10,16 +10,14 @@ class Servidor:
 
     def customer(self, conn, addr):
         while True:
-            msg = ''
             data = conn.recv(1024)
             if data.decode('utf-8').upper() == 'FIM':
                 msg = str(addr[0]) + ':' + str(addr[1]) + ' - disconnected'
                 print(msg)
                 conn.close()
                 break
-            else:
-                msg = '> ' + data.decode('utf-8')
-            print(msg)
+            msg = '> ' + data.decode('utf-8')
+            print(str(addr[0]) + ":" + str(addr[1]) + ' - ' + data.decode('utf-8'))
             conn.send(msg.encode('utf-8'))
 
 
